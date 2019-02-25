@@ -31,12 +31,6 @@ app.post('/usuario', function(req, res) {
 });
 app.put('/usuario/:id', function(req, res) {
     let id = req.params.id;
-    if (id === undefined) {
-        res.status(400).json({
-            ok: false,
-            mensaje: 'No se ha introducido el id de ningun usuario'
-        });
-    }
     res.json({
         id,
     })
