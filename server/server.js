@@ -16,11 +16,11 @@ app.use(bodyParser.json());
 
 app.use(require('./routes/usuario'));
 
-app.get('/', function(req, res) {
-    res.json({
-        hola: "hola"
-    })
-});
+// app.get('/', function(req, res) {
+//     res.json({
+//         hola: "hola"
+//     })
+// });
 
 mongoose.connect(process.env.URLDB, MONGOOSE_OPTS, (err, res) => {
     if (err) throw err;
