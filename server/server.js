@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 app.use(require('./routes/usuario'));
 
-app.get('/usuario', function(req, res) {
+app.get('/', function(req, res) {
     return "HOla";
 });
 
