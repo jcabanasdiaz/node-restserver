@@ -26,6 +26,10 @@ let urlDB;
 //     urlDB = `mongodb://localhost:27017/${mongoDBSettings.nombreBD}`;
 // } else {
 
+// ==================
+// MONGO_URI fué creada como variable de entorno en HEROKU (Para que no sea visible al subir el codigo a GIT)
+// heroku config:set MONGO_URI="la url entera sin variables"
+// ==================
 urlDB = process.env.MONGO_URI;
 // urlDB = `mongodb+srv://jcabanas:Realcore2018@jcabanas-test-36jpx.mongodb.net/cafe?retryWrites=true`
 // urlDB = `mongodb+srv://jcabanas:${mongoDBSettings.password}@jcabanas-test-36jpx.mongodb.net/${mongoDBSettings.nombreBD}?retryWrites=true`
