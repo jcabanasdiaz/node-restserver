@@ -9,6 +9,17 @@ process.env.PORT = process.env.PORT || 3000;
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 // ===================
+// Vencimiento del token
+// ===================
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+
+// ===================
+// SEED de autenticación
+// ===================
+// Variable de entorno en HEROKU (Para produccion)
+process.env.SEED = process.env.SEED || 'este-es-el-seed-desarrollo';
+
+// ===================
 // Base de datos
 // ===================
 
@@ -22,19 +33,19 @@ const mongoDBSettings = {
 }
 let urlDB;
 
-// if (process.env.NODE_ENV === 'dev') {
-//     urlDB = `mongodb://localhost:27017/${mongoDBSettings.nombreBD}`;
-// } else {
+if (process.env.NODE_ENV === 'dev') {
+    urlDB = `mongodb://localhost:27017/${mongoDBSettings.nombreBD}`;
+} else {
+    // ==================
+    // MONGO_URI fué creada como variable de entorno en HEROKU (Para que no sea visible al subir el codigo a GIT)
+    // heroku config:set MONGO_URI="la url entera sin variables"
+    // heroku config (Para ver las variables de entorno creadas)
+    // ==================
+    urlDB = process.env.MONGO_URI;
+    // urlDB = `mongodb+srv://jcabanas:Realcore2018@jcabanas-test-36jpx.mongodb.net/cafe?retryWrites=true`
+    // urlDB = `mongodb+srv://jcabanas:${mongoDBSettings.password}@jcabanas-test-36jpx.mongodb.net/${mongoDBSettings.nombreBD}?retryWrites=true`
+    // urlDB = `mongodb://jcabanas:${mongoDBSettings.password}@jcabanas-test-shard-00-02-36jpx.mongodb.net:27017/${mongoDBSettings.nombreBD}?ssl=true&replicaSet=JCABANAS-TEST-shard-0&authSource=admin&retryWrites=true`;
 
-// ==================
-// MONGO_URI fué creada como variable de entorno en HEROKU (Para que no sea visible al subir el codigo a GIT)
-// heroku config:set MONGO_URI="la url entera sin variables"
-// ==================
-urlDB = process.env.MONGO_URI;
-// urlDB = `mongodb+srv://jcabanas:Realcore2018@jcabanas-test-36jpx.mongodb.net/cafe?retryWrites=true`
-// urlDB = `mongodb+srv://jcabanas:${mongoDBSettings.password}@jcabanas-test-36jpx.mongodb.net/${mongoDBSettings.nombreBD}?retryWrites=true`
-// urlDB = `mongodb://jcabanas:${mongoDBSettings.password}@jcabanas-test-shard-00-02-36jpx.mongodb.net:27017/${mongoDBSettings.nombreBD}?ssl=true&replicaSet=JCABANAS-TEST-shard-0&authSource=admin&retryWrites=true`;
-
-// }
+}
 
 process.env.URLDB = urlDB;

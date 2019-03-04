@@ -3,6 +3,7 @@
  */
 const express = require('express');
 const Usuario = require('../models/usuario');
+const { verificaToken, verificaAdminRole } = require('../middlewares/autenticacion');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
 
@@ -19,7 +20,15 @@ const FIELDS_TO_GET = ['nombre', 'email', 'role', 'estado', 'img']; // Fields li
 // ======================
 //         GET
 // ======================
-app.get('/usuario', function(req, res) {
+app.get('/usuario', verificaToken, function(req, res) {
+
+    // Comprobación token
+    /* return res.json({
+        accion: "GET Usuario",
+        usuario: req.usuario,
+        nombre: req.usuario.nombre,
+        email: req.usuario.email
+    }); */
 
     let desde = Number(req.query.desde || 0);
     let limite = Number(req.query.limite || 5);
@@ -49,7 +58,17 @@ app.get('/usuario', function(req, res) {
 // ======================
 //         POST
 // ======================
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificaToken, verificaAdminRole], function(req, res) {
+
+    // Comprobación token
+    /* return res.json({
+        accion: "POST Usuario",
+        usuario: req.usuario,
+        nombre: req.usuario.nombre,
+        email: req.usuario.email
+    }); */
+
+
     let body = req.body;
 
     // Creamos una nueva instancia del Schema Usuario
@@ -80,7 +99,16 @@ app.post('/usuario', function(req, res) {
 // ======================
 //         UPDATE
 // ======================
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken, verificaAdminRole], function(req, res) {
+
+    // Comprobación token
+    /* return res.json({
+        accion: "PUT Usuario",
+        usuario: req.usuario,
+        nombre: req.usuario.nombre,
+        email: req.usuario.email
+    }); */
+
     let id = req.params.id;
     // _.Pick nos permite filtrar los campos que queremos actualizar
     let body = _.pick(req.body, FIELDS_UPDATE_PUT);
@@ -103,7 +131,16 @@ app.put('/usuario/:id', function(req, res) {
 // ======================
 //         DELETE
 // ======================
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken, verificaAdminRole], function(req, res) {
+
+    // Comprobación token
+    /* return res.json({
+        accion: "DELETE Usuario",
+        usuario: req.usuario,
+        nombre: req.usuario.nombre,
+        email: req.usuario.email
+    }); */
+
 
     let id = req.params.id;
     let cambiaEstado = { estado: false }
