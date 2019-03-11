@@ -9,7 +9,7 @@ const path = require('path');
 const app = express();
 
 // default options
-app.use(fileUpload({ useTempFiles: true }));
+app.use(fileUpload());
 
 app.put('/upload/:tipo/:id', (req, res) => {
 
@@ -74,8 +74,6 @@ app.put('/upload/:tipo/:id', (req, res) => {
         } else {
             imagenProducto(id, res, filename);
         }
-
-
     });
 });
 
