@@ -29,6 +29,6 @@ mongoose.connect(process.env.URLDB, MONGOOSE_OPTS, (err, res) => {
 });
 
 // Inicia la escucha
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log(`Escuchando el puerto`, process.env.PORT);
 });
